@@ -16,3 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Auth\Ldap')
+    ->prefix('auth/ldap/')
+    ->group(function() {
+        Route::post('login', 'LdapController@login')->name('auth.ldap.login');
+    });
+
+Route::namespace('Indicators')
+    ->prefix('indicators/seller')
+    ->group(function () {
+
+        Route::get('goal-percentage/{sellerId}', 'SellerController@goalPercentage');
+    });

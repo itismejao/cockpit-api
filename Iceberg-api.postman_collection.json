@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Iceberg-api",
+		"_postman_id": "30bc76f8-a03f-7249-53e3-e1e4587c62aa",
+		"description": "API do app de gestão a vista.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticação Via Ldap",
+			"request": {
+				"url": "http://yourdomain.com/api/auth/ldap/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"uid\": \"\",\n\t\"password\": \"\"\n}"
+				},
+				"description": "Envie o RE(uid) e Senha (password) utilizando Método POST.\n\nRequest\n\n{\n\t\"uid\": \"123456\",\n\t\"password\": \"45fa54df54asd8\"\n}\n\n\nResponse\n\n{\n    \"data\": {\n        \"uid\": \"123456\",\n        \"name\": \"João da Silva\",\n        \"email\": \"joaodasilva@yourdomain.com\"\n    }\n}\n\n\n"
+			},
+			"response": []
+		}
+	]
+}

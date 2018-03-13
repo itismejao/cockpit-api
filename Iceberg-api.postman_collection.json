@@ -8,24 +8,99 @@
 	},
 	"item": [
 		{
-			"name": "Autenticação Via Ldap",
-			"request": {
-				"url": "http://yourdomain.com/api/auth/ldap/login",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"uid\": \"\",\n\t\"password\": \"\"\n}"
-				},
-				"description": "Envie o RE(uid) e Senha (password) utilizando Método POST.\n\nRequest\n\n{\n\t\"uid\": \"123456\",\n\t\"password\": \"45fa54df54asd8\"\n}\n\n\nResponse\n\n{\n    \"data\": {\n        \"uid\": \"123456\",\n        \"name\": \"João da Silva\",\n        \"email\": \"joaodasilva@yourdomain.com\"\n    }\n}\n\n\n"
-			},
-			"response": []
+			"name": "Indicadores",
+			"description": "",
+			"item": [
+				{
+					"name": "Vendas",
+					"description": "",
+					"item": [
+						{
+							"name": "Vendas x Meta",
+							"request": {
+								"url": {
+									"raw": "http://yourdomain.com/api/indicators/seller/goal-percentage/241?beginDate=2018-03-01&endDate=2018-03-10",
+									"protocol": "http",
+									"host": [
+										"yourdomain",
+										"com"
+									],
+									"path": [
+										"api",
+										"indicators",
+										"seller",
+										"goal-percentage",
+										"241"
+									],
+									"query": [
+										{
+											"key": "beginDate",
+											"value": "2018-03-01",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "endDate",
+											"value": "2018-03-10",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros begiDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Autenticação",
+			"description": "",
+			"item": [
+				{
+					"name": "Autenticação Via Ldap",
+					"request": {
+						"url": "http://yourdomain.novomundo.com.br/api/auth/ldap/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"uid\": \"1030081\",\n\t\"password\": \"Ben-2017\"\n}"
+						},
+						"description": "Envie o RE(uid) e Senha (password) utilizando Método POST.\n\nRequest\n\n{\n\t\"uid\": \"123456\",\n\t\"password\": \"45fa54df54asd8\"\n}\n\n\nResponse\n\n{\n    \"data\": {\n        \"uid\": \"123456\",\n        \"name\": \"João da Silva\",\n        \"email\": \"joaodasilva@yourdomain.com\"\n    }\n}\n\n\n"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

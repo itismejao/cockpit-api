@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'uid', 'name', 'email', 'api_token', 'password',
     ];
 
     /**
@@ -26,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function generateToken()
+    {
+        $this->api_token = bcrypt(str_random(60) . $this->email . Carbon::now()->format('Y-m-d H:i'));
+        $this->newLastRequest();
+    }
+
+    public function newLastRequest()
+    {
+        $this->last_request = Carbon::now();
+        $this->save();
+    }
 }

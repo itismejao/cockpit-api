@@ -28,7 +28,8 @@ class SellerController extends ApiController
             $beginDate = $request->has('beginDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('beginDate'))->format('d/m/Y') . "'" : 'NULL';
             $endDate   = $request->has('endDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('endDate'))->format('d/m/Y') . "'" : 'NULL';
 
-            $indicators = DB::table('VW_ICE_INDICADOR_1_VEND')
+            $indicators = DB::connection('oracle')
+                ->table('VW_ICE_INDICADOR_1_VEND')
                 ->whereRaw("PACK_ICE_INDICADORES.FUNC_SET_VENDA_VENDEDOR({$beginDate},{$endDate}, {$sellerId}) = 1")
                 ->get();
 

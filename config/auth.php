@@ -18,6 +18,8 @@ return [
         'passwords' => 'users',
     ],
 
+    'api_token_lifetime' => env('API_TOKEN_LIFETIME'),
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

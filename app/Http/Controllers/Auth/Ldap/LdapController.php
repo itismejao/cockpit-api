@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth\Ldap;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\Auth\LdapUserResource;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast\Object_;
 
 /**
  * LDAP Authentication Adapter
@@ -49,7 +51,7 @@ class LdapController extends ApiController
 
                 $info = ldap_get_entries($ds, $search);
 
-                $user = $this->extractData($info);
+                $user = $this->getUser($info);
 
                 if (! isset($user->name)) {
                     return response()->json($this->error('User not found'), 404);
@@ -67,7 +69,7 @@ class LdapController extends ApiController
      * @param $data
      * @return array
      */
-    private function extractData($data)
+    private function getUser($data)
     {
         $newData = [];
 
@@ -86,7 +88,25 @@ class LdapController extends ApiController
             }
         }
 
-        return (object)$newData;
+        if (isset($newData['email'])) {
+            $user = User::where('email', $newData['email'])->first();
+
+            if (! $user) {
+                $user = User::create([
+                    'uid'  => $newData['uid'],
+                    'name' => $newData['name'],
+                    'email' => $newData['email'],
+                    'password' => bcrypt(str_random()),
+                    'api_token' => str_random()
+                ]);
+            }
+
+            $user->generateToken();
+
+            return $user;
+        }
+
+        return (Object)$newData;
     }
 
     /**

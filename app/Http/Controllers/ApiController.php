@@ -19,7 +19,7 @@ class ApiController extends Controller {
      * @param $data
      * @return array
      */
-    public function indicatorsFormat($data)
+    public function dataFormat($data)
     {
         return ['data' => $data];
     }

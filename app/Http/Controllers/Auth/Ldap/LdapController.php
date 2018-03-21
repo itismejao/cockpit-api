@@ -60,7 +60,7 @@ class LdapController extends ApiController
                 return new LdapUserResource($user);
             }
         } catch (\Exception $e) {
-            return response()->json($this->error($e->getMessage()));
+            return response()->json($this->error($e->getMessage()), 401);
         }
     }
 
@@ -151,6 +151,21 @@ class LdapController extends ApiController
     private function formatKeySearch($value, $key='cn')
     {
         return "{$key}={$value}";
+    }
+
+    /**
+     * Obtem o menu inicial do usuário
+     * @param $uid
+     * @return mixed
+     */
+    private function rootMenu($uid)
+    {
+        $menus = DB::connection('oracle')
+            ->table('vw_ice_menu')
+            ->whereRaw("pack_ice_admin.func_set_menu({$uid}) = 1")
+            ->get();
+
+        return $menus;
     }
 
 }

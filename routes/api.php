@@ -23,6 +23,22 @@ Route::middleware(['auth:api', 'verify_api_token'])
 
                 /** Meta x Vendas */
                 Route::get('goal-percentage/{sellerId}', 'SellerController@goalPercentage');
+
+                /** Meta x Vendas Diário*/
+                Route::get('goal-percentage-daily/{sellerId}', 'SellerController@goalPercentageDaily');
+            });
+
+        /** Users */
+        Route::namespace('Users')
+            ->prefix('users')
+            ->group(function () {
+
+                Route::namespace('Profiles')
+                    ->prefix('profiles')
+                    ->group(function () {
+                        /** Menu Android do usuário */
+                        Route::get('android-menu/{sellerId}', 'ProfileController@androidMenu');
+                    });
             });
     });
 

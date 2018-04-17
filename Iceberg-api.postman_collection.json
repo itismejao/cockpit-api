@@ -16,10 +16,10 @@
 					"description": "",
 					"item": [
 						{
-							"name": "Vendas x Meta",
+							"name": "Vendas x Meta Geral",
 							"request": {
 								"url": {
-									"raw": "http://sostenes.novomundo.com.br/iceberg/api/indicators/seller/goal-percentage/241?beginDate=2018-03-01&endDate=2018-03-29",
+									"raw": "http://sostenes.novomundo.com.br/iceberg/api/indicators/sale/goal-percentage/{accessLevel}/{userId}?detail=0",
 									"protocol": "http",
 									"host": [
 										"sostenes",
@@ -31,20 +31,15 @@
 										"iceberg",
 										"api",
 										"indicators",
-										"seller",
+										"sale",
 										"goal-percentage",
-										"241"
+										"{accessLevel}",
+										"{userId}"
 									],
 									"query": [
 										{
-											"key": "beginDate",
-											"value": "2018-03-01",
-											"equals": true,
-											"description": ""
-										},
-										{
-											"key": "endDate",
-											"value": "2018-03-29",
+											"key": "detail",
+											"value": "0",
 											"equals": true,
 											"description": ""
 										}
@@ -65,7 +60,144 @@
 									}
 								],
 								"body": {},
-								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros begiDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros beginDate, endDate, filter são opicionais\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"7833231.8\",\n            \"valor_meta\": \"2242799.84\",\n            \"perc_meta\": \"349.26\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"2124319.04\",\n            \"valor_meta\": \"738897.86\",\n            \"perc_meta\": \"287.49\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Ud/Portateis\",\n            \"valor_venda\": \"1579792.36\",\n            \"valor_meta\": \"620080.97\",\n            \"perc_meta\": \"254.77\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Telefonia\",\n            \"valor_venda\": \"6075387.8\",\n            \"valor_meta\": \"1654331.78\",\n            \"perc_meta\": \"367.24\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Informatica\",\n            \"valor_venda\": \"8640.04\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2903566.48\",\n            \"valor_meta\": \"842309.31\",\n            \"perc_meta\": \"344.71\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"1775092\",\n            \"valor_meta\": \"627613.61\",\n            \"perc_meta\": \"282.83\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".4\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        },\n        {\n            \"v_func\": \"11025\",\n            \"data_venda\": null,\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"22300029.92\",\n            \"valor_meta\": \"6726033.37\",\n            \"perc_meta\": \"331.54\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\",\n            \"valor_meta_pm\": \"0\",\n            \"valor_venda_pm\": \"0\",\n            \"meta_lb\": \"0\",\n            \"perc_lb\": \"0\",\n            \"perc_crescimento\": \"0\",\n            \"prev_venda\": \"0\",\n            \"prev_venda_crescimento\": \"0\",\n            \"perc_cresc_meta\": \"0\"\n        }\n    ]\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Vendas Geral",
+							"request": {
+								"url": "http://sostenes.novomundo.com.br/iceberg/api/indicators/sale/general-sales/{accessLevel}/{userId}",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {token}",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros beginDate, endDate, indicator, filter e dept são opicionais"
+							},
+							"response": []
+						},
+						{
+							"name": "Busca departamentos",
+							"request": {
+								"url": "http://sostenes.novomundo.com.br/iceberg/api/indicators/sale/get-departments",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {token}",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"id_departamento\": \"1\",\n            \"desc_departamento\": \"BRANCA\"\n        },\n        {\n            \"id_departamento\": \"2\",\n            \"desc_departamento\": \"MOVEIS - DORMITORIOS\"\n        },\n        {\n            \"id_departamento\": \"3\",\n            \"desc_departamento\": \"UD/PORTATEIS\"\n        },\n        {\n            \"id_departamento\": \"4\",\n            \"desc_departamento\": \"TELEFONIA\"\n        },\n        {\n            \"id_departamento\": \"5\",\n            \"desc_departamento\": \"INFORMATICA\"\n        },\n        {\n            \"id_departamento\": \"6\",\n            \"desc_departamento\": \"MARROM\"\n        },\n        {\n            \"id_departamento\": \"7\",\n            \"desc_departamento\": \"MOVEIS - SALA E COZINHA\"\n        },\n        {\n            \"id_departamento\": \"9\",\n            \"desc_departamento\": \"BRINDES\"\n        }\n    ]\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Vendas x Meta",
+							"request": {
+								"url": "http://sostenes.novomundo.com.br/iceberg/api/indicators/seller/goal-percentage/{sellerId}",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {token}",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros beginDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Filtros Para Indicador de Venda Geral",
+							"request": {
+								"url": "http://sostenes.novomundo.com.br/iceberg/api/indicators/sale/get-filters/{userId}",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {token}",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n- Request\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"id_filtro\": \"2\",\n            \"desc_filtro\": \"23, 504,505,515,600,605\"\n        },\n        {\n            \"id_filtro\": \"4\",\n            \"desc_filtro\": \"DIVISÃO DF\"\n        },\n        {\n            \"id_filtro\": \"12\",\n            \"desc_filtro\": \"PROJETO DE MOVEIS\"\n        },\n        {\n            \"id_filtro\": \"18\",\n            \"desc_filtro\": \"DIVISAO NORTE\"\n        },\n        {\n            \"id_filtro\": \"19\",\n            \"desc_filtro\": \"DIVISAO CENTRO\"\n        },\n        {\n            \"id_filtro\": \"20\",\n            \"desc_filtro\": \"DIVISAO OESTE\"\n        },\n        {\n            \"id_filtro\": \"283\",\n            \"desc_filtro\": \"MANAUS E RORAIMA\"\n        },\n        {\n            \"id_filtro\": \"324\",\n            \"desc_filtro\": \"LOJAS MARANHAO\"\n        },\n        {\n            \"id_filtro\": \"421\",\n            \"desc_filtro\": \"PROJETO MOBILE\"\n        },\n        {\n            \"id_filtro\": \"481\",\n            \"desc_filtro\": \"EXCETO LOJAS FECHADAS\"\n        },\n        {\n            \"id_filtro\": \"482\",\n            \"desc_filtro\": \"FILIAIS ACOMPANHAMENTO 2015\"\n        },\n        {\n            \"id_filtro\": \"507\",\n            \"desc_filtro\": \"INTERIOR 1 20160128\"\n        },\n        {\n            \"id_filtro\": \"641\",\n            \"desc_filtro\": \"PARA E AM-RR\"\n        },\n        {\n            \"id_filtro\": \"721\",\n            \"desc_filtro\": \"GOIAS\"\n        },\n        {\n            \"id_filtro\": \"722\",\n            \"desc_filtro\": \"PRODUTIVIDADE\"\n        },\n        {\n            \"id_filtro\": \"743\",\n            \"desc_filtro\": \"E-COMMERCE\"\n        },\n        {\n            \"id_filtro\": \"763\",\n            \"desc_filtro\": \"OC + MP\"\n        },\n        {\n            \"id_filtro\": \"785\",\n            \"desc_filtro\": \"QUIOSQUES\"\n        },\n        {\n            \"id_filtro\": \"804\",\n            \"desc_filtro\": \"INTERIOR GO\"\n        },\n        {\n            \"id_filtro\": \"821\",\n            \"desc_filtro\": \"DF\"\n        }\n    ]\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "Vendas de serviços",
+							"request": {
+								"url": {
+									"raw": "http://sostenes.novomundo.com.br/iceberg/api/indicators/seller/services/5/11025?detail=0",
+									"protocol": "http",
+									"host": [
+										"sostenes",
+										"novomundo",
+										"com",
+										"br"
+									],
+									"path": [
+										"iceberg",
+										"api",
+										"indicators",
+										"seller",
+										"services",
+										"5",
+										"11025"
+									],
+									"query": [
+										{
+											"key": "detail",
+											"value": "0",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer $2y$10$R8rDCo1UCx3OlTwlxaQa5ubrpwrYR47KzODPctzt9i3C.Onpf/XrS",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros beginDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
 							},
 							"response": []
 						},
@@ -119,7 +251,7 @@
 									}
 								],
 								"body": {},
-								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros begiDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
+								"description": "Indicador de vendas x meta.\n\n- Request\n\nOs parâmetros beginDate e endDate são opicionais, se ocultos vai trazer os resultados com período default.\n\n\n- Response\n\n{\n    \"data\": [\n        {\n            \"departamento\": \"Branca\",\n            \"valor_venda\": \"26470.71\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Dormitorios\",\n            \"valor_venda\": \"11197.43\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Marrom\",\n            \"valor_venda\": \"2549\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Moveis - Sala E Cozinha\",\n            \"valor_venda\": \"5719.72\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Brindes\",\n            \"valor_venda\": \".02\",\n            \"valor_meta\": \"0\",\n            \"perc_meta\": \"0\",\n            \"perc_pm\": \"0\",\n            \"perc_serv\": \"0\"\n        },\n        {\n            \"departamento\": \"Total\",\n            \"valor_venda\": \"45936.88\",\n            \"valor_meta\": \"28427.57\",\n            \"perc_meta\": \"161.59\",\n            \"perc_pm\": \"2.06\",\n            \"perc_serv\": \"10.61\"\n        }\n    ]\n}"
 							},
 							"response": []
 						}
@@ -151,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"uid\": \"\",\n\t\"password\": \"\"\n}"
+							"raw": "{\n\t\"uid\": \"1030081\",\n\t\"password\": \"Ben-2017\"\n}"
 						},
 						"description": "Envie o RE(uid) e Senha (password) utilizando Método POST.\n\nRequest\n\n{\n\t\"uid\": \"123456\",\n\t\"password\": \"45fa54df54asd8\"\n}\n\n\nResponse\n\n{\n    \"data\": {\n        \"uid\": \"123456\",\n        \"name\": \"João da Silva\",\n        \"email\": \"joaodasilva@yourdomain.com\"\n    }\n}\n\n\n"
 					},

@@ -178,7 +178,6 @@ class SaleController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
-            dd($e);
             return response()->json($this->error(), 500);
         }
     }

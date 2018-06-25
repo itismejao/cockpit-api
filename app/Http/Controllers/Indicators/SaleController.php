@@ -110,6 +110,7 @@ class SaleController extends ApiController
             'indicator' => 'int',
             'filter' => 'int',
             'dept' => 'int',
+            'ld' => 'int',
         ]);
 
         try {
@@ -118,20 +119,22 @@ class SaleController extends ApiController
             $indicator = $request->has('indicator') ? "'" . $request->get('indicator') . "'" : 'NULL';
             $filter    = $request->has('filter') ? "'" . $request->get('filter') . "'" : 'NULL';
             $dept      = $request->has('dept') ? "'" . $request->get('dept') . "'" : 'NULL';
+            $ld        = $request->has('ld') ? "'" . $request->get('ld') . "'" : 'NULL';
 
-            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept) {
+            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
                 DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
                 $indicators = DB::connection('oracle')
                     ->table('vw_ice_venda')
-                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}) = 1")
+                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
 
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            dd($e);
             return response()->json($this->error(), 500);
         }
     }
@@ -160,20 +163,22 @@ class SaleController extends ApiController
             $indicator = $request->has('indicator') ? "'" . $request->get('indicator') . "'" : 'NULL';
             $filter    = $request->has('filter') ? "'" . $request->get('filter') . "'" : 'NULL';
             $dept      = $request->has('dept') ? "'" . $request->get('dept') . "'" : 'NULL';
+            $ld        = 'NULL';
 
-            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept) {
+            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
                 DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
                 $indicators = DB::connection('oracle')
                     ->table('vw_ice_venda_serv')
-                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}) = 1")
+                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
 
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            dd($e);
             return response()->json($this->error(), 500);
         }
     }

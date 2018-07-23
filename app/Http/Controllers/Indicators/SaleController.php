@@ -38,11 +38,11 @@ class SaleController extends ApiController
 
             DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $detail, $filter) {
 
-                DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
                 $indicators = DB::connection('oracle')
-                    ->table('vw_ice_ind_vend_1')
-                    ->whereRaw("pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$userId}, {$detail}, {$filter}) = 1")
+                    ->table('nmlabs.vw_ice_ind_vend_1')
+                    ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$userId}, {$detail}, {$filter}) = 1")
                     ->get();
             });
 
@@ -64,8 +64,8 @@ class SaleController extends ApiController
 
         try {
             $indicators = DB::connection('oracle')
-                ->table('vw_ice_ind_vend_filtro')
-                ->whereRaw("pack_ice_venda.func_seta_filtro({$userId}) = 1")
+                ->table('nmlabs.vw_ice_ind_vend_filtro')
+                ->whereRaw("nmlabs.pack_ice_venda.func_seta_filtro({$userId}) = 1")
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
@@ -83,7 +83,7 @@ class SaleController extends ApiController
     {
         try {
             $indicators = DB::connection('oracle')
-                ->table('vw_ice_departamentos')
+                ->table('nmlabs.vw_ice_departamentos')
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
@@ -123,11 +123,11 @@ class SaleController extends ApiController
 
             DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
-                DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
                 $indicators = DB::connection('oracle')
-                    ->table('vw_ice_venda')
-                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
+                    ->table('nmlabs.vw_ice_venda')
+                    ->whereRaw("nmlabs.pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
 
@@ -166,11 +166,11 @@ class SaleController extends ApiController
 
             DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
-                DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
                 $indicators = DB::connection('oracle')
-                    ->table('vw_ice_venda_serv')
-                    ->whereRaw("pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
+                    ->table('nmlabs.vw_ice_venda_serv')
+                    ->whereRaw("nmlabs.pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
 

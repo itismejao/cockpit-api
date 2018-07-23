@@ -29,8 +29,8 @@ class SellerController extends ApiController
             $endDate   = $request->has('endDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('endDate'))->format('d/m/Y') . "'" : 'NULL';
 
             $indicators = DB::connection('oracle')
-                ->table('vw_ice_indicador_1_vend')
-                ->whereRaw("pack_ice_indicadores.func_set_venda({$beginDate},{$endDate}, {$sellerId}, 0) = 1")
+                ->table('nmlabs.vw_ice_indicador_1_vend')
+                ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$beginDate},{$endDate}, {$sellerId}, 0) = 1")
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
@@ -56,8 +56,8 @@ class SellerController extends ApiController
             $endDate   = $request->has('endDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('endDate'))->format('d/m/Y') . "'" : 'NULL';
 
             $indicators = DB::connection('oracle')
-                ->table('vw_ice_indicador_1_vend')
-                ->whereRaw("pack_ice_indicadores.func_set_venda_detalhe({$beginDate},{$endDate}, {$sellerId}) = 1")
+                ->table('nmlabs.vw_ice_indicador_1_vend')
+                ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda_detalhe({$beginDate},{$endDate}, {$sellerId}) = 1")
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
@@ -85,11 +85,11 @@ class SellerController extends ApiController
 
             DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $sellerId, $detail, $filter) {
 
-                DB::connection('oracle')->executeProcedure('proc_seta_filtro_comercial_v2', ['v_id_usuario' => $sellerId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $sellerId]);
 
                 $indicators = DB::connection('oracle')
-                    ->table('vw_ice_indicador_2_vend')
-                    ->whereRaw("pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$sellerId}, {$detail}, {$filter}) = 1")
+                    ->table('nmlabs.vw_ice_indicador_2_vend')
+                    ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$sellerId}, {$detail}, {$filter}) = 1")
                     ->get();
 
             });

@@ -26,13 +26,13 @@ class ProfileController extends ApiController
 
         try {
             $menu = DB::connection('oracle')
-                ->table('vw_ice_menu')
+                ->table('nmlabs.vw_ice_menu')
                 ->where(function ($query) use ($sellerId, $request) {
 
                     if ($request->has('menu_id') and ctype_digit($request->get('menu_id'))) {
-                        $query->whereRaw("pack_ice_admin.func_set_menu({$sellerId}, {$request->get('menu_id')}) = 1");
+                        $query->whereRaw("nmlabs.pack_ice_admin.func_set_menu({$sellerId}, {$request->get('menu_id')}) = 1");
                     } else {
-                        $query->whereRaw("pack_ice_admin.func_set_menu({$sellerId}) = 1");
+                        $query->whereRaw("nmlabs.pack_ice_admin.func_set_menu({$sellerId}) = 1");
                     }
                 })
                 ->get();

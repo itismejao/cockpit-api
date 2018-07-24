@@ -22,14 +22,13 @@ class SellerController extends ApiController
      */
     public function goalPercentage(Request $request, $sellerId)
     {
-        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
+        DB::setDateFormat('dd/mm/rrrr');
 
         try {
             $beginDate = $request->has('beginDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('beginDate'))->format('d/m/Y') . "'" : 'NULL';
             $endDate   = $request->has('endDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('endDate'))->format('d/m/Y') . "'" : 'NULL';
 
-            $indicators = DB::connection('oracle')
-                ->table('nmlabs.vw_ice_indicador_1_vend')
+            $indicators = DB::table('nmlabs.vw_ice_indicador_1_vend')
                 ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$beginDate},{$endDate}, {$sellerId}, 0) = 1")
                 ->get();
 
@@ -49,14 +48,13 @@ class SellerController extends ApiController
      */
     public function goalPercentageDaily(Request $request, $sellerId)
     {
-        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
+        DB::setDateFormat('dd/mm/rrrr');
 
         try {
             $beginDate = $request->has('beginDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('beginDate'))->format('d/m/Y') . "'" : 'NULL';
             $endDate   = $request->has('endDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('endDate'))->format('d/m/Y') . "'" : 'NULL';
 
-            $indicators = DB::connection('oracle')
-                ->table('nmlabs.vw_ice_indicador_1_vend')
+            $indicators = DB::table('nmlabs.vw_ice_indicador_1_vend')
                 ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda_detalhe({$beginDate},{$endDate}, {$sellerId}) = 1")
                 ->get();
 
@@ -75,7 +73,7 @@ class SellerController extends ApiController
      */
     public function services(Request $request, $accessLevel, $sellerId)
     {
-        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
+        DB::setDateFormat('dd/mm/rrrr');
 
         try {
             $beginDate = $request->has('beginDate') ? "'" . Carbon::createFromFormat('Y-m-d', $request->get('beginDate'))->format('d/m/Y') . "'" : 'NULL';
@@ -83,12 +81,11 @@ class SellerController extends ApiController
             $detail    = $request->has('detail') ? "'" . $request->get('detail') . "'" : 'NULL';
             $filter    = $request->has('filter') ? "'" . $request->get('filter') . "'" : 'NULL';
 
-            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $sellerId, $detail, $filter) {
+            DB::transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $sellerId, $detail, $filter) {
 
-                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $sellerId]);
+                DB::executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $sellerId]);
 
-                $indicators = DB::connection('oracle')
-                    ->table('nmlabs.vw_ice_indicador_2_vend')
+                $indicators = DB::table('nmlabs.vw_ice_indicador_2_vend')
                     ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$sellerId}, {$detail}, {$filter}) = 1")
                     ->get();
 

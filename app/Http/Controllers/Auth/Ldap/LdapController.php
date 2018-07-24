@@ -160,8 +160,7 @@ class LdapController extends ApiController
      */
     private function rootMenu($uid)
     {
-        $menus = DB::connection('oracle')
-            ->table('vw_ice_menu')
+        $menus = DB::table('nmlabs.vw_ice_menu')
             ->whereRaw("pack_ice_admin.func_set_menu({$uid}) = 1")
             ->get();
 

@@ -22,11 +22,10 @@ class ProfileController extends ApiController
      */
     public function androidMenu(Request $request, $sellerId)
     {
-        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
+        DB::setDateFormat('dd/mm/rrrr');
 
         try {
-            $menu = DB::connection('oracle')
-                ->table('nmlabs.vw_ice_menu')
+            $menu = DB::table('nmlabs.vw_ice_menu')
                 ->where(function ($query) use ($sellerId, $request) {
 
                     if ($request->has('menu_id') and ctype_digit($request->get('menu_id'))) {

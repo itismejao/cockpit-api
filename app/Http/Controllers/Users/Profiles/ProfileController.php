@@ -41,7 +41,7 @@ class ProfileController extends ApiController
             return response()->json($this->dataFormat($menu));
 
         } catch (\Exception $e) {
-            Log::error($e->getTraceAsString());
+            report($e);
             return response()->json($this->error(), 500);
         }
     }

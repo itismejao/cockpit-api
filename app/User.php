@@ -28,9 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function generateToken()
+    public function generateToken($ip)
     {
         $this->api_token = bcrypt(str_random(60) . $this->email . Carbon::now()->format('Y-m-d H:i'));
+        $this->last_ip   = $ip;
+
         $this->newLastRequest();
     }
 

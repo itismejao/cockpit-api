@@ -37,7 +37,7 @@ class SellerController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
-            Log::error($e->getTrace());
+            Log::error($e->getTraceAsString());
             return response()->json($this->error(), 500);
         }
     }
@@ -64,7 +64,7 @@ class SellerController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
-            Log::error($e->getTrace());
+            Log::error($e->getTraceAsString());
             return response()->json($this->error(), 500);
         }
     }
@@ -99,7 +99,7 @@ class SellerController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
-            Log::error($e->getTrace());
+            Log::error($e->getTraceAsString());
             return response()->json($this->error(), 500);
         }
     }

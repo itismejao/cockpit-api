@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class SellerController
@@ -22,10 +23,11 @@ class ProfileController extends ApiController
      */
     public function androidMenu(Request $request, $sellerId)
     {
-        DB::setDateFormat('dd/mm/rrrr');
+        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
 
         try {
-            $menu = DB::table('nmlabs.vw_ice_menu')
+            $menu = DB::connection('oracle')
+                ->table('nmlabs.vw_ice_menu')
                 ->where(function ($query) use ($sellerId, $request) {
 
                     if ($request->has('menu_id') and ctype_digit($request->get('menu_id'))) {
@@ -39,6 +41,7 @@ class ProfileController extends ApiController
             return response()->json($this->dataFormat($menu));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }

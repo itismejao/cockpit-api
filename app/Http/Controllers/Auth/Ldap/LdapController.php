@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Resources\Auth\LdapUserResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Expr\Cast\Object_;
 
@@ -60,6 +61,7 @@ class LdapController extends ApiController
                 return new LdapUserResource($user);
             }
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error($e->getMessage()), 401);
         }
     }
@@ -160,7 +162,8 @@ class LdapController extends ApiController
      */
     private function rootMenu($uid)
     {
-        $menus = DB::table('nmlabs.vw_ice_menu')
+        $menus = DB::connection('oracle')
+            ->table('nmlabs.vw_ice_menu')
             ->whereRaw("pack_ice_admin.func_set_menu({$uid}) = 1")
             ->get();
 

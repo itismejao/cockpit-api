@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class SellerController
@@ -22,7 +23,7 @@ class SaleController extends ApiController
      */
     public function goalPercentage(Request $request, $accessLevel, $userId)
     {
-        DB::setDateFormat('dd/mm/rrrr');
+        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
 
         $request->validate([
             'beginDate' => 'date',
@@ -36,11 +37,12 @@ class SaleController extends ApiController
             $detail    = $request->has('detail') ? "'" . $request->get('detail') . "'" : 'NULL';
             $filter    = $request->has('filter') ? "'" . $request->get('filter') . "'" : 'NULL';
 
-            DB::transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $detail, $filter) {
+            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $detail, $filter) {
 
-                DB::executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
-                $indicators = DB::table('nmlabs.vw_ice_ind_vend_1')
+                $indicators = DB::connection('oracle')
+                    ->table('nmlabs.vw_ice_ind_vend_1')
                     ->whereRaw("nmlabs.pack_ice_indicadores.func_set_venda({$accessLevel}, {$beginDate},{$endDate}, {$userId}, {$detail}, {$filter}) = 1")
                     ->get();
             });
@@ -48,6 +50,7 @@ class SaleController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }
@@ -59,16 +62,18 @@ class SaleController extends ApiController
      */
     public function goalPercentageWithFilter($userId)
     {
-        DB::setDateFormat('dd/mm/rrrr');
+        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
 
         try {
-            $indicators = DB::table('nmlabs.vw_ice_ind_vend_filtro')
+            $indicators = DB::connection('oracle')
+                ->table('nmlabs.vw_ice_ind_vend_filtro')
                 ->whereRaw("nmlabs.pack_ice_venda.func_seta_filtro({$userId}) = 1")
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }
@@ -80,12 +85,14 @@ class SaleController extends ApiController
     public function getDepartments()
     {
         try {
-            $indicators = DB::table('nmlabs.vw_ice_departamentos')
+            $indicators = DB::connection('oracle')
+                ->table('nmlabs.vw_ice_departamentos')
                 ->get();
 
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }
@@ -99,7 +106,7 @@ class SaleController extends ApiController
      */
     public function generalSales(Request $request, $accessLevel, $userId)
     {
-        DB::setDateFormat('dd/mm/rrrr');
+        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
 
         $request->validate([
             'beginDate' => 'date',
@@ -118,11 +125,12 @@ class SaleController extends ApiController
             $dept      = $request->has('dept') ? "'" . $request->get('dept') . "'" : 'NULL';
             $ld        = $request->has('ld') ? "'" . $request->get('ld') . "'" : 'NULL';
 
-            DB::transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
+            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
-                DB::executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
-                $indicators = DB::table('nmlabs.vw_ice_venda')
+                $indicators = DB::connection('oracle')
+                    ->table('nmlabs.vw_ice_venda')
                     ->whereRaw("nmlabs.pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
@@ -130,6 +138,7 @@ class SaleController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }
@@ -142,7 +151,7 @@ class SaleController extends ApiController
      */
     public function generalSalesServices(Request $request, $accessLevel, $userId)
     {
-        DB::setDateFormat('dd/mm/rrrr');
+        DB::connection('oracle')->setDateFormat('dd/mm/rrrr');
 
         $request->validate([
             'beginDate' => 'date',
@@ -160,11 +169,12 @@ class SaleController extends ApiController
             $dept      = $request->has('dept') ? "'" . $request->get('dept') . "'" : 'NULL';
             $ld        = 'NULL';
 
-            DB::transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
+            DB::connection('oracle')->transaction(function () use ($beginDate, $endDate, &$indicators, $accessLevel, $userId, $indicator, $filter, $dept, $ld) {
 
-                DB::executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
+                DB::connection('oracle')->executeProcedure('nm.proc_seta_filtro_comercial_v2', ['v_id_usuario' => $userId]);
 
-                $indicators = DB::table('nmlabs.vw_ice_venda_serv')
+                $indicators = DB::connection('oracle')
+                    ->table('nmlabs.vw_ice_venda_serv')
                     ->whereRaw("nmlabs.pack_ice_venda.func_seta_venda({$accessLevel}, {$indicator}, {$beginDate}, {$endDate}, {$userId}, {$filter}, {$dept}, {$ld}) = 1")
                     ->get();
             });
@@ -172,6 +182,7 @@ class SaleController extends ApiController
             return response()->json($this->dataFormat($indicators));
 
         } catch (\Exception $e) {
+            Log::error($e->getTrace());
             return response()->json($this->error(), 500);
         }
     }

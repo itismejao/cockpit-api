@@ -52,7 +52,7 @@ class LdapController extends ApiController
 
                 $info = ldap_get_entries($ds, $search);
 
-                $user = $this->getUser($info);
+                $user = $this->getUser($info, $request->ip());
 
                 if (! isset($user->name)) {
                     return response()->json($this->error('User not found'), 404);
@@ -61,7 +61,7 @@ class LdapController extends ApiController
                 return new LdapUserResource($user);
             }
         } catch (\Exception $e) {
-            Log::error($e->getTrace());
+            Log::info($e->getTraceAsString());
             return response()->json($this->error($e->getMessage()), 401);
         }
     }
@@ -71,7 +71,7 @@ class LdapController extends ApiController
      * @param $data
      * @return array
      */
-    private function getUser($data)
+    private function getUser($data, $ip)
     {
         $newData = [];
 
@@ -103,7 +103,7 @@ class LdapController extends ApiController
                 ]);
             }
 
-            $user->generateToken();
+            $user->generateToken($ip);
 
             return $user;
         }

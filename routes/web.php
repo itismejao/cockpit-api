@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware('auth.basic')
+    ->prefix('/dev')
+    ->group(function () {
+        Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    });

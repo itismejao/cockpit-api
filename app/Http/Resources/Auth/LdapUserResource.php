@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Auth;
 
+use Facades\App\Http\Services\Vtrine as VtrineService;
 use Illuminate\Http\Resources\Json\Resource;
 
 class LdapUserResource extends Resource
@@ -18,7 +19,8 @@ class LdapUserResource extends Resource
             'uid'   => $this->uid,
             'name'  => $this->name,
             'email' => $this->email,
-            'token' => $this->api_token
+            'token' => $this->api_token,
+            'menu'  => VtrineService::getMenuList($this->uid)
         ];
     }
 }

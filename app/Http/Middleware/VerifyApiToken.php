@@ -2,7 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Services\Vtrine as VtrineService;
+use App\Http\Services\Vtrine;
+use Facades\App\Http\Services\Vtrine as VtrineService;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +23,7 @@ class VerifyApiToken
         $lastRequest = Auth::user()->last_request;
         $lastIp = Auth::user()->last_ip;
 
-        $vtrineService = new VtrineService();
-        $msgAccess = $vtrineService->collaboratorCanAccess(Auth::user()->uid);
+        $msgAccess = VtrineService::collaboratorCanAccess(Auth::user()->uid);
 
         if ($msgAccess) {
             return response()->json(

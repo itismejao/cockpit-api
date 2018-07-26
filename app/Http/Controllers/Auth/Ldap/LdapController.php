@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Auth\Ldap;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\Auth\LdapUserResource;
+use App\Http\Services\Vtrine as VtrineService;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Expr\Cast\Object_;
 
 /**
  * LDAP Authentication Adapter
@@ -47,7 +46,10 @@ class LdapController extends ApiController
                 }
 
                 if (! ($search=@ldap_search($ds, config('ldap.base_dn'), $this->formatKeySearch($uid))) ) {
-                    return response()->json($this->error('User not found'), 404);
+                    return response()->json(
+                        ['code' => 1, 'error' => 'User not found'],
+                        401
+                    );
                 }
 
                 $info = ldap_get_entries($ds, $search);
@@ -55,14 +57,31 @@ class LdapController extends ApiController
                 $user = $this->getUser($info, $request->ip());
 
                 if (! isset($user->name)) {
-                    return response()->json($this->error('User not found'), 404);
+                    return response()->json(
+                        ['code' => 1, 'error' => 'User not found'],
+                        401
+                    );
+                }
+
+                /** Validate if user can access at this time */
+                $vtrineService = new VtrineService();
+                $msgAccess = $vtrineService->collaboratorCanAccess($user->uid);
+
+                if ($msgAccess) {
+                    return response()->json(
+                        ['code' => 2, 'error' => 'Access not allowed at this time'],
+                        401
+                    );
                 }
 
                 return new LdapUserResource($user);
             }
         } catch (\Exception $e) {
-            Log::info($e->getTraceAsString());
-            return response()->json($this->error($e->getMessage()), 401);
+            report($e);
+            return response()->json(
+                ['code' => 3, 'error' => 'ldap error'],
+                401
+            );
         }
     }
 

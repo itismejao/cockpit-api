@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Services\Vtrine as VtrineService;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -21,13 +22,27 @@ class VerifyApiToken
         $lastRequest = Auth::user()->last_request;
         $lastIp = Auth::user()->last_ip;
 
+        $vtrineService = new VtrineService();
+        $msgAccess = $vtrineService->collaboratorCanAccess(Auth::user()->uid);
+
+        if ($msgAccess) {
+            return response()->json(
+                ['code' => 2, 'error' => 'Access not allowed at this time'],
+                401
+            );
+        }
+
         /**
          * If the application is validating the IP and
          * IP of the request is different from the ip registered in the authentication
          */
         if ( (env('API_VALIDATE_IP', false) == true) and ($lastIp != $request->ip()) ) {
             Log::info('IP different: ' . Auth::user()->email . ' | Old IP: ' . $lastIp . ' | New IP: ' . $request->ip());
-            return response()->json(['message' => 'Token validation error'], 401);
+
+            return response()->json(
+                ['code' => 4, 'error' => 'Ip conflict'],
+                401
+            );
         }
 
         if ($lastRequest) {
@@ -45,6 +60,9 @@ class VerifyApiToken
             }
         }
 
-        return response()->json(['message' => 'Token expired'], 401);
+        return response()->json(
+            ['code' => 5, 'error' => 'Token expired'],
+            401
+        );
     }
 }

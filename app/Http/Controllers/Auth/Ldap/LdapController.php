@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth\Ldap;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\Auth\LdapUserResource;
-use App\Http\Services\Vtrine as VtrineService;
+use Facades\App\Http\Services\Vtrine as VtrineService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -64,8 +64,7 @@ class LdapController extends ApiController
                 }
 
                 /** Validate if user can access at this time */
-                $vtrineService = new VtrineService();
-                $msgAccess = $vtrineService->collaboratorCanAccess($user->uid);
+                $msgAccess = VtrineService::collaboratorCanAccess($user->uid);
 
                 if ($msgAccess) {
                     return response()->json(
@@ -79,7 +78,7 @@ class LdapController extends ApiController
         } catch (\Exception $e) {
             report($e);
             return response()->json(
-                ['code' => 3, 'error' => 'ldap error'],
+                ['code' => 3, 'error' => 'Ldap error'],
                 401
             );
         }

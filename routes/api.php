@@ -21,11 +21,14 @@ Route::middleware(['auth:api', 'verify_api_token'])
             ->prefix('indicators')
             ->group(function () {
 
+                Route::post('/{uid}', 'IndexController@run');
+
+                /**
                 Route::prefix('seller')
                     ->group(function () {
                         Route::get('goal-percentage/{sellerId}', 'SellerController@goalPercentage');
 
-                        /** Meta x Vendas Diário*/
+                        /** Meta x Vendas Diário
                         Route::get('goal-percentage-daily/{sellerId}', 'SellerController@goalPercentageDaily');
 
                         Route::get('services/{accessLevel}/{sellerId}', 'SellerController@services');
@@ -34,13 +37,13 @@ Route::middleware(['auth:api', 'verify_api_token'])
                 Route::prefix('sale')
                     ->group(function () {
 
-                        /** Meta x Vendas Geral */
+                        /** Meta x Vendas Geral
                         Route::get('goal-percentage/{accessLevel}/{userId}', 'SaleController@goalPercentage')
                             ->where(['accessLevel' => '[0-9]+', 'userId' => '[0-9]+']);
 
                         Route::get('get-departments','SaleController@getDepartments');
 
-                        /** Meta x Vendas Geral com Filtro */
+                        /** Meta x Vendas Geral com Filtro
                         Route::get('get-filters/{userId}', 'SaleController@goalPercentageWithFilter');
 
                         Route::get('general-sales/{accessLevel}/{userId}', 'SaleController@generalSales')
@@ -50,6 +53,8 @@ Route::middleware(['auth:api', 'verify_api_token'])
                             ->where(['accessLevel' => '[0-9]+', 'userId' => '[0-9]+']);
 
                     });
+
+                */
             });
 
         /** Users */

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Indicators;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,8 +20,10 @@ class IndexController extends ApiController
      * @param $uid
      * @return \Illuminate\Http\JsonResponse
      */
-    public function run(Request $request, $uid)
+    public function run(Request $request)
     {
+        $uid = Auth::user()->uid;
+
         $json = $request->getContent();
 
         Validator::make(

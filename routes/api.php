@@ -21,7 +21,7 @@ Route::middleware(['auth:api', 'verify_api_token'])
             ->prefix('indicators')
             ->group(function () {
 
-                Route::post('/{uid}', 'IndexController@run');
+                Route::post('/', 'IndexController@run');
 
                 /**
                 Route::prefix('seller')

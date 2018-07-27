@@ -26,6 +26,10 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "",
+								"value": ""
 							}
 						],
 						"body": {
@@ -33,7 +37,7 @@
 							"raw": "{\n\t\"tipo\": \"menu\"\n}"
 						},
 						"url": {
-							"raw": "https://cockpith.novomundo.com.br/api/indicators/{uid}",
+							"raw": "https://cockpith.novomundo.com.br/api/indicators",
 							"protocol": "https",
 							"host": [
 								"cockpith",
@@ -43,8 +47,7 @@
 							],
 							"path": [
 								"api",
-								"indicators",
-								"{uid}"
+								"indicators"
 							]
 						},
 						"description": "Indicadores de vendas x meta.\n\n- Request"

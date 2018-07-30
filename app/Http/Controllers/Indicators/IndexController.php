@@ -32,8 +32,6 @@ class IndexController extends ApiController
         )->validate();
 
         try {
-            $json = $request->get('json');
-
             $result = $response = '';
 
             $pdo = DB::connection('oracle')->getPdo();

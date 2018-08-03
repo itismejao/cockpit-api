@@ -47,7 +47,7 @@ class LdapController extends ApiController
 
                 if (! ($search=@ldap_search($ds, config('ldap.base_dn'), $this->formatKeySearch($uid))) ) {
                     return response()->json(
-                        ['code' => 1, 'error' => 'User not found'],
+                        ['code' => 1, 'error' => 'User not found', 'msg' => 'Crendencias inválidas, tente novamente'],
                         401
                     );
                 }
@@ -58,7 +58,7 @@ class LdapController extends ApiController
 
                 if (! isset($user->name)) {
                     return response()->json(
-                        ['code' => 1, 'error' => 'User not found'],
+                        ['code' => 1, 'error' => 'User not found', 'msg' => 'Crendencias inválidas, tente novamente'],
                         401
                     );
                 }
@@ -68,7 +68,7 @@ class LdapController extends ApiController
 
                 if ($msgAccess) {
                     return response()->json(
-                        ['code' => 2, 'error' => 'Access not allowed at this time'],
+                        ['code' => 2, 'error' => 'Access not allowed at this time', 'msg' => 'Acesso negado neste momento'],
                         401
                     );
                 }
@@ -78,7 +78,7 @@ class LdapController extends ApiController
         } catch (\Exception $e) {
             report($e);
             return response()->json(
-                ['code' => 3, 'error' => 'Ldap error'],
+                ['code' => 3, 'error' => 'Ldap error', 'msg' => 'Credenciais inválidas, tente novamente'],
                 401
             );
         }

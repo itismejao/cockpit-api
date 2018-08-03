@@ -27,7 +27,7 @@ class VerifyApiToken
 
         if ($msgAccess) {
             return response()->json(
-                ['code' => 2, 'error' => 'Access not allowed at this time'],
+                ['code' => 2, 'error' => 'Access not allowed at this time', 'msg' => 'Acesso negado neste momento'],
                 401
             );
         }
@@ -40,7 +40,7 @@ class VerifyApiToken
             Log::info('IP different: ' . Auth::user()->email . ' | Old IP: ' . $lastIp . ' | New IP: ' . $request->ip());
 
             return response()->json(
-                ['code' => 4, 'error' => 'Ip conflict'],
+                ['code' => 4, 'error' => 'Ip conflict', 'msg' => 'Sessão expirada, faça login novamente'],
                 401
             );
         }
@@ -61,7 +61,7 @@ class VerifyApiToken
         }
 
         return response()->json(
-            ['code' => 5, 'error' => 'Token expired'],
+            ['code' => 5, 'error' => 'Token expired', 'msg' => 'Sessão expirada, faça login novamente'],
             401
         );
     }

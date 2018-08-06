@@ -12,6 +12,10 @@ class Vtrine
      */
     public function collaboratorCanAccess($uid)
     {
+        if (env('APP_ENV') != 'production' and (in_array($uid, ['1030081']))) {
+            return '';
+        }
+
         $result = $dados = '';
 
         $pdo = DB::connection('oracle')->getPdo();

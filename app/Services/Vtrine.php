@@ -12,7 +12,7 @@ class Vtrine
      */
     public function collaboratorCanAccess($uid)
     {
-        if (env('APP_ENV') != 'production' and (in_array($uid, ['1030081']))) {
+        if (env('APP_ENV') != 'production' and (in_array($uid, ['1030081', '11025']))) {
             return '';
         }
 

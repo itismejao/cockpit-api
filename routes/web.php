@@ -19,4 +19,13 @@ Route::middleware('auth.basic')
     ->prefix('/dev')
     ->group(function () {
         Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+        Route::prefix('/apps')
+            ->namespace('\Apps')
+            ->group(function () {
+                
+                Route::get('/', 'AppController@index');
+
+                Route::post('/update', 'AppController@update');
+            });
     });

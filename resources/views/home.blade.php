@@ -40,7 +40,6 @@
         <p>Bem Vindo família Novo Mundo! O Cockpit Novo Mundo é um aplicativo criado para acompanhamento gerenciais de seus indicadores.</p>
         <p>Para entrar no aplicativo, você deve inserir seu <b>RE</b> e <b>Senha</b> (a mesma do Vtrine).</p>
         <p>O Cockpit Novo Mundo, está disponível nas plataformas Android e iOS.</p>
-        <p>Abaixo, você pode clicar na sua plataforma desejada para obter o aplicativo.</p>
 
         <div id="linkapp">
             <a href="https://play.google.com/store/apps/details?id=com.novomundo.labs.iceberg">

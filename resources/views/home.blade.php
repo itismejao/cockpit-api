@@ -37,7 +37,7 @@
     </style>
  <body>
     <div id="content">
-        <p>Bem Vindo família Novo Mundo! O Cockpit Novo Mundo é um aplicativo criado para acompanhamento gerenciais de seus indicadores.</p>
+        <p>Bem Vindo família Novo Mundo! O Cockpit é um aplicativo criado para acompanhamento de seus indicadores.</p>
         <p>Para entrar no aplicativo, você deve inserir seu <b>RE</b> e <b>Senha</b> (a mesma do Vtrine).</p>
         <p>Abaixo, você pode clicar na sua plataforma desejada para obter o aplicativo.</p>
 

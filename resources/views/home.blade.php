@@ -4,11 +4,14 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
     <style>
         img {
             max-width: 100%;
+        }
+
+        @font-face {
+            font-family: 'UniNeueBook';
+            src: url('fonts/UniNeueBook-Regular.otf');
         }
 
         #content {
@@ -25,7 +28,7 @@
 
         body {
             background-color: #f3f3f3;
-            font-family: Roboto;
+            font-family: 'UniNeueBook';
         }
 
         .rodape {

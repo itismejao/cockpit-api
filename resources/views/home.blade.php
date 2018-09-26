@@ -16,8 +16,8 @@
 
         #content {
             margin: 0 auto;
-            top: 50%; /* IMPORTANT */
-            left: 50%; /* IMPORTANT */
+            top: 50%;
+            left: 50%;
             display: block;
             max-width: 600px;
         }

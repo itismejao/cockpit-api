@@ -28,4 +28,11 @@ Route::middleware('auth.basic')
 
                 Route::post('/update', 'AppController@update');
             });
+
+        Route::prefix('/analytics')
+            ->namespace('\Apps')
+            ->group(function () {
+
+                Route::get('/', 'AppAnalyticController@index');
+            });    
     });

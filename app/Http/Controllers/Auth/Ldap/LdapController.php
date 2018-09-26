@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth\Ldap;
 
+use App\AppAnalytic;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\Auth\LdapUserResource;
 use Facades\App\Http\Services\Vtrine as VtrineService;
@@ -33,6 +34,8 @@ class LdapController extends ApiController
 
             $uid = $request->get('uid');
             $password = $request->get('password');
+
+            $this->insertAppAnalytics($request);
 
             $ds = ldap_connect(config('ldap.hostname'), config('ldap.port'));
 
@@ -73,12 +76,14 @@ class LdapController extends ApiController
                     );
                 }
 
+                $this->verifiedAppAnalytics($request);
+
                 return new LdapUserResource($user);
             }
         } catch (\Exception $e) {
             report($e);
             return response()->json(
-                ['code' => 3, 'error' => 'Ldap error', 'msg' => 'Credenciais inválidas, tente novamente'],
+                ['code' => 6, 'error' => 'Application error', 'msg' => 'Ocorreu uma falha, tente novamente'],
                 401
             );
         }
@@ -186,6 +191,55 @@ class LdapController extends ApiController
             ->get();
 
         return $menus;
+    }
+
+    /**
+     * Insert app analytics
+     * @param Request $request
+     * @return bool
+     */
+    private function insertAppAnalytics(Request $request) {
+
+        if ($request->hasHeader('x-cockpit-platform') and ($request->hasHeader('x-cockpit-version'))) {
+            $platform = $request->header('x-cockpit-platform');
+            $version = $request->header('x-cockpit-version');
+
+            if (!empty($platform) and !empty($version)) {
+                AppAnalytic::firstOrCreate(
+                    [
+                        'uid' => $request->get('uid'),
+                        'platform' => $platform,
+                        'version' => $version,
+                    ],
+                    ['verified' => false]
+                );
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Set 'verified' equal true to the app analytics
+     * @param Request $request
+     * @return bool
+     */
+    private function verifiedAppAnalytics(Request $request) {
+
+        if ($request->hasHeader('x-cockpit-platform') and ($request->hasHeader('x-cockpit-version'))) {
+            $platform = $request->header('x-cockpit-platform');
+            $version = $request->header('x-cockpit-version');
+
+            if (!empty($platform) and !empty($version)) {
+                AppAnalytic::where('uid', $request->get('uid'))
+                    ->where('platform', $platform)
+                    ->where('version', $version)
+                    ->where('verified', false)
+                    ->update(['verified' => true]);
+            }
+        }
+
+        return false;
     }
 
 }

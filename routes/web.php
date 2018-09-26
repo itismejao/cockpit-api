@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    echo \Tremby\LaravelGitVersion\GitVersionHelper::getVersion();
+    return view('home');
 });
 
 Route::middleware('auth.basic')

@@ -80,8 +80,17 @@ class LdapController extends ApiController
 
                 return new LdapUserResource($user);
             }
+
         } catch (\Exception $e) {
+            if ( strpos($e->getMessage(), 'Unable to bind to server: Invalid credentials')) {
+                return response()->json(
+                    ['code' => 3, 'error' => 'Ldap error', 'msg' => 'Credenciais inválidas, tente novamente'],
+                    401
+                );
+            }
+
             report($e);
+
             return response()->json(
                 ['code' => 6, 'error' => 'Application error', 'msg' => 'Ocorreu uma falha, tente novamente'],
                 401

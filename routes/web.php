@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    $iosVersion = \App\Models\AppVersion::select(['version'])->where('platform', 'ios')->first();
+    return view('home', ['iosVersion' => isset($iosVersion->version) ? $iosVersion->version : null]);
 });
 
 Route::middleware('auth.basic')

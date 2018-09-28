@@ -47,13 +47,15 @@
             </a>
         </div>
 
+        @if($iosVersion)
         <div>&nbsp;</div>
 
         <div id="linkapp">
-            <a href="itms-services://?action=download-manifest&url=https://cockpith.novomundo.com.br/ios/manifest.plist">
+            <a href="itms-services://?action=download-manifest&url=https://cockpit.novomundo.com.br/ios/{{$iosVersion}}/manifest.plist">
                 <img src="img/botao-ios.png" alt="Cockpit para iOS">
             </a>
         </div>
+        @endif
 
         <div>&nbsp;</div>
 

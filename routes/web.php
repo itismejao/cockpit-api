@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('home', ['iosVersion' => isset($iosVersion->version) ? $iosVersion->version : null]);
 });
 
+Route::get('/ios-tutorial', function () {
+    return view('ios-tutorial');
+});
+
 Route::middleware('auth.basic')
     ->prefix('/dev')
     ->group(function () {

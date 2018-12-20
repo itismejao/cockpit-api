@@ -76,4 +76,6 @@ Route::namespace('Auth\Ldap')
     ->prefix('auth/ldap/')
     ->group(function() {
         Route::post('login', 'LdapController@login')->name('auth.ldap.login');
+        
+        Route::post('simple-login', 'LdapController@simpleLogin')->name('auth.ldap.simple-login');
     });

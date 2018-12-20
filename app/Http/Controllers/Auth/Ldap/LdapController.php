@@ -19,6 +19,65 @@ class LdapController extends ApiController
 {
 
     /**
+     * Just Authenticate on ldap
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function simpleLogin(Request $request)
+    {
+        try {
+            $validator = $this->validator($request->all());
+
+            if ($validator->fails()) {
+                return response()->json($this->error($validator->errors()), 401);
+            }
+
+            $uid = $request->get('uid');
+            $password = $request->get('password');
+
+            $ds = ldap_connect(config('ldap.hostname'), config('ldap.port'));
+
+            if ($ds) {
+                ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, config('ldap.protocol_version'));
+
+                $auth = ldap_bind($ds, $this->getRDN($uid), $password);
+
+                if (! $auth) {
+                    return response()->json($this->error('Invalid Credentials'), 401);
+                }
+
+                if (! ($search=@ldap_search($ds, config('ldap.base_dn'), $this->formatKeySearch($uid))) ) {
+                    return response()->json(
+                        ['error' => 'User not found'],
+                        401
+                    );
+                }
+
+                $info = ldap_get_entries($ds, $search);
+
+                $user = $this->getUserSimple($info);
+
+                return response()->json($user);
+            }
+
+        } catch (\Exception $e) {
+            if ( strpos($e->getMessage(), 'Unable to bind to server: Invalid credentials')) {
+                return response()->json(
+                    ['error' => 'Invalid Credentials'],
+                    401
+                );
+            }
+
+            return response()->json(
+                ['error' => 'Application error'],
+                500
+            );
+        }
+    }
+    
+
+    /**
      * Perform request login
      * @param Request $request
      * @return $this
@@ -141,6 +200,33 @@ class LdapController extends ApiController
         }
 
         return (Object)$newData;
+    }
+
+    /**
+     * Return User info without entity format, just ldap data 
+     * @param Array $data
+     * @return void
+     */
+    public function getUserSimple($data)
+    {
+        $newData = [];
+
+        for ($i=0; $i<$data['count']; $i++) {
+
+            if(array_key_exists('displayname',$data[$i])) {
+                $newData['name'] = $this->formatName($data[$i]['displayname'][0]);
+            }
+
+            if(array_key_exists('mail',$data[$i])) {
+                $newData['email'] = $data[$i]['mail'][0];
+            }
+
+            if(array_key_exists('employeenumber',$data[$i])) {
+                $newData['uid'] = $data[$i]['employeenumber'][0];
+            }
+        }
+
+        return $newData;
     }
 
     /**

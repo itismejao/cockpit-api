@@ -192,6 +192,9 @@ class LdapController extends ApiController
                     'password' => bcrypt(str_random()),
                     'api_token' => str_random()
                 ]);
+            } else if ($user->uid != $newData['uid']) {
+                $user->uid = $newData['uid'];
+                $user->save();
             }
 
             $user->generateToken($ip);

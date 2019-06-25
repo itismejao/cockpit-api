@@ -47,6 +47,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'api_combat' => [
+            'driver' => 'token',
+            'provider' => 'users_combat',
+        ],
     ],
 
     /*
@@ -70,6 +75,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'users_combat' => [
+            'driver' => 'eloquent',
+            'model' => App\UserCombat::class,
         ],
 
         // 'users' => [

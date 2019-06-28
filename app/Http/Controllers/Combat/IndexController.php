@@ -36,7 +36,7 @@ class IndexController extends ApiController
 
             $pdo = DB::connection('oracle')->getPdo();
 
-            $stmt = $pdo->prepare("declare v_id_funcionario number(10) := :uid; v_dados clob := :data; begin :result := nmlabs.pack_cockpit_admin.func_api_cockpit(v_id_funcionario, v_dados); :lob := v_dados; end;");
+            $stmt = $pdo->prepare("declare v_id_funcionario number(10) := :uid; v_dados clob := :data; begin :result := nm.pack_combate_preco.proc_api_combate_preco(v_id_funcionario, v_dados); :lob := v_dados; end;");
             $stmt->bindParam(':result', $result, \PDO::PARAM_INT);
             $stmt->bindParam(':uid', $uid, \PDO::PARAM_INT);
             $stmt->bindParam(':data', $data, \PDO::PARAM_STR);

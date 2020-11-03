@@ -24,7 +24,10 @@
         <div>&nbsp;</div>
         
         <div id="left">
-            <a href="itms-services://?action=download-manifest&url=https://cockpit.novomundo.com.br/ios/{{$iosVersion}}/manifest.plist">
+            <!--<a href="itms-services://?action=download-manifest&url=https://cockpit.novomundo.com.br/ios/{{$iosVersion}}/manifest.plist">
+                <img src="img/botao-ios.png" alt="Cockpit para iOS">
+            </a>-->
+            <a href="itms-services://?action=download-manifest&url=https://cockpit.novomundo.com.br/ios/build/manifest.plist">
                 <img src="img/botao-ios.png" alt="Cockpit para iOS">
             </a>
         </div>

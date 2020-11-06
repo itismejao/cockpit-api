@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
@@ -47,7 +47,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-850CC7BE-ECB5-440F-82FE-91EFD2CBDE7B.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-850CC7BE-ECB5-440F-82FE-91EFD2CBDE7B.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -66,7 +66,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-B910BB9E-E9C2-4BCB-A189-7AF39EC7E17D.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-B910BB9E-E9C2-4BCB-A189-7AF39EC7E17D.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -93,7 +93,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-57D273C8-E771-4BBC-A66A-7E060D41A999.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-57D273C8-E771-4BBC-A66A-7E060D41A999.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -148,7 +148,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-16D069D2-3806-4D40-9608-45EBF07A8DE1.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-16D069D2-3806-4D40-9608-45EBF07A8DE1.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -297,7 +297,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-EB8EE2AF-6B93-4239-B4F5-556CB1D21DA6.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-EB8EE2AF-6B93-4239-B4F5-556CB1D21DA6.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -493,7 +493,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-C073EEDD-4F90-4324-A105-FB5BBE16FD3F.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-C073EEDD-4F90-4324-A105-FB5BBE16FD3F.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -514,7 +514,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-8E83DEAA-B7D9-4E1A-9254-C2797AFAE313.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-8E83DEAA-B7D9-4E1A-9254-C2797AFAE313.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -541,7 +541,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-293AF3DC-E676-4CC3-A402-4B3D57DAE2FA.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-293AF3DC-E676-4CC3-A402-4B3D57DAE2FA.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -629,7 +629,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-C92C53E6-2AD5-45B3-A0A8-461D75CEFF40.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-C92C53E6-2AD5-45B3-A0A8-461D75CEFF40.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -667,7 +667,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-AB895BBE-2886-40B4-90E0-871C85B72197.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-AB895BBE-2886-40B4-90E0-871C85B72197.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -686,7 +686,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-9C5598BF-ED36-44AB-BB40-CDAE2ED3B7C5.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-9C5598BF-ED36-44AB-BB40-CDAE2ED3B7C5.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
@@ -706,7 +706,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-A855E332-4964-4264-BDD1-43347358CF07.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-A855E332-4964-4264-BDD1-43347358CF07.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -1152,7 +1152,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-06A38FBE-9B42-4F2F-BBDE-1D30E96E1C1A.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-06A38FBE-9B42-4F2F-BBDE-1D30E96E1C1A.ipa</string>
 					<key>variantDescriptors</key>
 					<array>
 						<dict>
@@ -1293,7 +1293,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://cockpit.novomundo.com.br/ios/1.7/Apps/Runner-F5C552FF-A789-4AAD-950D-C3E551C6949F.ipa</string>
+					<string>https://cockpit.novomundo.com.br/ios/build/Apps/Runner-F5C552FF-A789-4AAD-950D-C3E551C6949F.ipa</string>
 					<key>variantDescriptors</key>
 					<array/>
 					<key>variantIds</key>
